@@ -59,7 +59,13 @@ export async function GET(
     if (!ticket) {
       return NextResponse.json({ error: 'Ticket not found' }, { status: 404 })
     }
-    const userIdStr = (ticket.userId as { _id?: { toString: () => string } })?._id?.toString?.() ?? (ticket.userId as string)?.toString?.()
+    const userIdRaw = ticket.userId as unknown as { _id?: { toString(): string } } | string | null | undefined
+    const userIdStr =
+      userIdRaw != null && typeof userIdRaw === 'object' && userIdRaw._id != null
+        ? (typeof userIdRaw._id === 'object' && 'toString' in userIdRaw._id ? userIdRaw._id.toString() : String(userIdRaw._id))
+        : typeof userIdRaw === 'string'
+          ? userIdRaw
+          : ''
     if (authUser.role !== 'admin' && userIdStr !== authUser.userId) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
