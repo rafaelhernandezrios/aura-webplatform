@@ -3,6 +3,8 @@ import connectDB from '@/lib/mongodb'
 import Release from '@/models/Release'
 import { getAuthUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

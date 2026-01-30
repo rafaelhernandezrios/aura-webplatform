@@ -4,6 +4,8 @@ import User from '@/models/User'
 import bcrypt from 'bcryptjs'
 import { getAuthUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function PATCH(request: NextRequest) {
   try {
     await connectDB()

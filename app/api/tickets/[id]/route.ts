@@ -3,6 +3,8 @@ import connectDB from '@/lib/mongodb'
 import Ticket from '@/models/Ticket'
 import { getAuthUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 function serializeTicket(t: {
   _id: unknown
   userId: unknown

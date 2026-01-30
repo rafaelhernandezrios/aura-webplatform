@@ -3,6 +3,8 @@ import connectDB from '@/lib/mongodb'
 import Resource from '@/models/Resource'
 import { getAuthUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     await connectDB()
