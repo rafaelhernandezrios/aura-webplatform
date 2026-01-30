@@ -24,7 +24,7 @@ if (!MONGO_URI) {
 async function createUser() {
   try {
     // Connect to MongoDB
-    await mongoose.connect(MONGO_URI)
+    await mongoose.connect(MONGO_URI as string)
     console.log('✅ Connected to MongoDB')
 
     // Get user data from command line arguments or use defaults

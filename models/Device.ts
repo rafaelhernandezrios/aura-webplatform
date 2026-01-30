@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose'
 
-export interface IDevice extends Document {
+export interface IDevice extends Omit<Document, 'model'> {
   serialNumber: string
   userId?: mongoose.Types.ObjectId
   model: string

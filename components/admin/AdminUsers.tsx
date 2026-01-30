@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FiUserPlus, FiRefreshCw, FiUsers, FiEdit2, FiTrash2, FiToggleLeft, FiToggleRight, FiCpu } from 'react-icons/fi'
 
 interface User {
@@ -32,7 +32,7 @@ export default function AdminUsers({ token }: { token: string | null }) {
   const [devices, setDevices] = useState<DeviceOption[]>([])
   const [assignedDeviceIds, setAssignedDeviceIds] = useState<string[]>([])
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     if (!token) return
     try {
       setLoading(true)
@@ -46,11 +46,11 @@ export default function AdminUsers({ token }: { token: string | null }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [token])
 
   useEffect(() => {
     fetchUsers()
-  }, [token])
+  }, [fetchUsers])
 
   const fetchDevices = async (): Promise<DeviceOption[]> => {
     if (!token) return []
@@ -308,7 +308,7 @@ export default function AdminUsers({ token }: { token: string | null }) {
               ) : (
                 <div className="max-h-40 overflow-y-auto space-y-2 p-3 bg-glass-surface rounded-lg">
                   {devices.map((d) => {
-                    const assignedToOther = d.userId && d.userId.id !== editingUser?.id
+                    const assignedToOther = Boolean(d.userId && d.userId.id !== editingUser?.id)
                     return (
                       <label
                         key={d.id}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FiMessageCircle, FiRefreshCw, FiEye, FiTrash2 } from 'react-icons/fi'
 
 interface Ticket {
@@ -30,7 +30,7 @@ export default function AdminTickets({ token }: { token: string | null }) {
   const [status, setStatus] = useState('')
   const [saving, setSaving] = useState(false)
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     if (!token) return
     setLoading(true)
     try {
@@ -44,7 +44,7 @@ export default function AdminTickets({ token }: { token: string | null }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [token])
 
   const fetchDetail = async (id: string) => {
     if (!token) return
@@ -63,7 +63,7 @@ export default function AdminTickets({ token }: { token: string | null }) {
 
   useEffect(() => {
     fetchList()
-  }, [token])
+  }, [fetchList])
 
   const sendReply = async () => {
     if (!token || !detailId || !reply.trim()) return

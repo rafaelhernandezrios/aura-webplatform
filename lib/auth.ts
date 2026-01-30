@@ -13,14 +13,14 @@ export interface TokenPayload {
 }
 
 export function generateToken(payload: TokenPayload): string {
-  return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
+  return jwt.sign(payload, JWT_SECRET as jwt.Secret, {
+    expiresIn: JWT_EXPIRES_IN as jwt.SignOptions['expiresIn'],
   })
 }
 
 export function verifyToken(token: string): TokenPayload | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload
+    const decoded = jwt.verify(token, JWT_SECRET as jwt.Secret) as TokenPayload
     return decoded
   } catch (error) {
     return null

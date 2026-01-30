@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FiBell, FiPlus, FiRefreshCw, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 interface Announcement {
@@ -33,7 +33,7 @@ export default function AdminAnnouncements({ token }: { token: string | null }) 
   })
   const [saving, setSaving] = useState(false)
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     if (!token) return
     setLoading(true)
     try {
@@ -47,11 +47,11 @@ export default function AdminAnnouncements({ token }: { token: string | null }) 
     } finally {
       setLoading(false)
     }
-  }
+  }, [token])
 
   useEffect(() => {
     fetchList()
-  }, [token])
+  }, [fetchList])
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault()

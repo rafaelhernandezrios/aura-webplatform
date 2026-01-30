@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FiSettings, FiPlus, FiRefreshCw, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 interface Setting {
@@ -20,7 +20,7 @@ export default function AdminSettings({ token }: { token: string | null }) {
   const [form, setForm] = useState({ key: '', value: '' })
   const [saving, setSaving] = useState(false)
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     if (!token) return
     setLoading(true)
     try {
@@ -34,11 +34,11 @@ export default function AdminSettings({ token }: { token: string | null }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [token])
 
   useEffect(() => {
     fetchList()
-  }, [token])
+  }, [fetchList])
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault()
