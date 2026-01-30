@@ -1,0 +1,40 @@
+{
+  "name": "aura-userpage",
+  "version": "2.1.0",
+  "description": "Aura Neurotech User Portal - Ecosistema cerrado para gestión de hardware Aura",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.975.0",
+    "@aws-sdk/s3-request-presigner": "^3.975.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "framer-motion": "^10.16.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.0",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "zustand": "^4.5.7"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^14.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.0"
+  }
+}
